@@ -1,8 +1,19 @@
 <template>
   <div id="Border">
     <div id="Name"><h1>Todolist</h1>
-    <input type="text" v-model="item"><button @click="Add()">add</button></div>
-    <div id="Things"><div v-for="(item,index) in items" class="Thing"><input type="checkbox" v-model="item.result"><div class="doWhat">{{ item.thing }}</div><button @click="shanchu(index)">删除</button></div></div>
+      <input type="text" v-model="item" @keyup.enter="Add()" id="First_input">
+      <button @click="Add()" >add</button>
+    </div>
+    <div id="Things">
+      <div v-for="(item,index) in items" class="Thing">
+        <input type="checkbox" v-model="item.result">
+        <div class="doWhat">{{ item.thing }}</div>
+        <button @click="shanchu(index)">删除</button>
+      </div>
+    </div>
+    <button id="tijiao" @click="tijiao">
+      提交
+    </button>
   </div>
 </template>
 <script setup lang="ts">
@@ -11,13 +22,14 @@ import axios from "axios"
   let items=ref();
   items.value=[{id:0,thing:"吃饭",result:"true"},{id:1,thing:"睡觉",result:"true"},{id:2,thing:"学习",result:"false"},{id:3,thing:"工作",result:"false"}];
   let item=ref('');
+  let xyz=items.value
   console.log(items.value)
-  const posts = ref([])
   onMounted(async () => {
-    axios.get('/')
+    axios.get('/shuju')
       .then(response => {
         console.log(response.data);
         items.value=response.data
+        xyz=response.data
         for(var i=0;i<items.value.length;i++)
         {
           if(items.value[i].result==1)
@@ -32,9 +44,20 @@ import axios from "axios"
       .catch(error => console.log(error));
   }
     )
+  function tijiao(){
+    //axios.post('/tijiao',"尝试").then(response=>{console.log(response.data)})
+    axios({
+    method: 'post',
+    url: '/tijiao',
+    data: {
+      xyz
+    }
+    }).then(response=>{console.log(response.data)});
+  }
   function Add(){
-    let new_item={thing:item.value,result:"false"}
+    let new_item={id:items.value.length+1,thing:item.value,result:false}
     items.value.push(new_item)
+    item.value=""
   }
   function shanchu(a:number){
     items.value.splice(a,1)
@@ -75,16 +98,19 @@ import axios from "axios"
     display: flex;
     justify-content: space-between;
     align-self: center;
+    flex-wrap: wrap;
   }
   .Thing{
     margin-top: 5%;
     display: flex;
     justify-content: space-between;
+    padding-left: 10px;
   }
   .doWhat{
     display: flex;
     justify-content: center;
     align-self: center;
+
   }
   #Things input{
     position: relative;
@@ -92,4 +118,5 @@ import axios from "axios"
     width: 30px;
     height: 30px;
   }
+
 </style>
