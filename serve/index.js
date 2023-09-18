@@ -32,7 +32,7 @@ app.post('/tijiao',function(req,res){
     else 
     {
       console.log(row.lieshu)
-      j=row.lieshu+1//lieshu是数据库的列数，j用来判断是否需要新增或者删除。
+      j=row.lieshu//lieshu是数据库的列数，j用来判断是否需要新增或者删除。
       for(i;i<dataArray.length;i++)
       {
 
@@ -48,7 +48,7 @@ app.post('/tijiao',function(req,res){
           console.log('444+'+i)
         }
       }
-      if(i<j)
+      if(i<=j)
       {
         for(i;i<j;i++)
         {
