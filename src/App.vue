@@ -6,19 +6,24 @@
     </div>
     <div id="Things">
       <div v-for="(item,index) in items" class="Thing">
-        <input type="checkbox" v-model="item.result">
-        <div class="doWhat">{{ item.thing }}</div>
-        <button @click="shanchu(index)">删除</button>
+        <!-- <input type="checkbox" v-model="item.result">
+        <div class="doWhat">{{ item.thing }}</div> -->
+        <el-checkbox  v-model="item.result" :label=item.thing size="large"  border />
+        <el-button     type="primary" size="large" @click="shanchu(index)" plain>删除</el-button>
+        <!-- <button @click="shanchu(index)">删除</button> -->
       </div>
     </div>
-    <button id="tijiao" @click="tijiao">
+    <!-- <button id="tijiao" @click="tijiao">
       提交
-    </button>
+    </button> -->
+    <el-button     type="success" size="large" @click="tijiao" plain>删除</el-button>
   </div>
 </template>
 <script setup lang="ts">
 import { ref ,onMounted} from "vue";
 import axios from "axios"
+import { ElCheckbox,ElButton } from "element-plus";
+
   let items=ref();
   items.value=[{id:0,thing:"吃饭",result:"true"},{id:1,thing:"睡觉",result:"true"},{id:2,thing:"学习",result:"false"},{id:3,thing:"工作",result:"false"}];
   let item=ref('');
@@ -38,6 +43,16 @@ import axios from "axios"
           }
           else{
             items.value[i].result=false
+          }
+        }
+        for(i=0;i<items.value.length;i++)
+        {
+          for(var j=0;j<items.value.length-i;j++)
+          {
+            if(items.value[j]>items.value[j+1])
+            {
+              [items.value[j+1],items.value[j]] = [items.value[j],items.value[j+1]]
+            }
           }
         }
       })
