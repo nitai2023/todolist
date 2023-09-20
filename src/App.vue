@@ -1,28 +1,29 @@
 <template>
   <div id="Border">
     <div id="Name"><h1>Todolist</h1>
-      <input type="text" v-model="item" @keyup.enter="Add()" id="First_input">
-      <button @click="Add()" >add</button>
+      <!-- <input type="text" v-model="item" @keyup.enter="Add()" id="First_input"> -->
+      <el-input v-model="item" @keyup.enter="Add()" placeholder="Please input"   size="large" style="width: 300px"/>
+      <el-button @click="Add()" size="large" type="primary" plain><el-text  size="large">添加</el-text></el-button>
     </div>
     <div id="Things">
       <div v-for="(item,index) in items" class="Thing">
         <!-- <input type="checkbox" v-model="item.result">
         <div class="doWhat">{{ item.thing }}</div> -->
         <el-checkbox  v-model="item.result" :label=item.thing size="large"  border />
-        <el-button     type="primary" size="large" @click="shanchu(index)" plain>删除</el-button>
+        <el-button     type="warning" size="large" @click="shanchu(index)" plain><el-text  size="large">删除</el-text></el-button>
         <!-- <button @click="shanchu(index)">删除</button> -->
       </div>
     </div>
     <!-- <button id="tijiao" @click="tijiao">
       提交
     </button> -->
-    <el-button     type="success" size="large" @click="tijiao" plain>删除</el-button>
+    <el-button  type="success" size="large" @click="tijiao" plain><el-text  size="large">提交</el-text></el-button>
   </div>
 </template>
 <script setup lang="ts">
 import { ref ,onMounted} from "vue";
 import axios from "axios"
-import { ElCheckbox,ElButton } from "element-plus";
+import { ElCheckbox,ElButton,ElText,ElInput } from "element-plus";
 
   let items=ref();
   items.value=[{id:0,thing:"吃饭",result:"true"},{id:1,thing:"睡觉",result:"true"},{id:2,thing:"学习",result:"false"},{id:3,thing:"工作",result:"false"}];
