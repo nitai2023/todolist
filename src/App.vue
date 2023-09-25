@@ -1,7 +1,7 @@
 <template>
   <div id="Border">
     <div id="Name"><h1>Todolist</h1>
-      <el-progress :percentage=progress status="success" />
+      <el-progress :percentage=progress status="success" /> <!-- 进度条 -->
       <el-input v-model="item" @keyup.enter="Add()" placeholder="Please input"   size="large" style="width: 300px"/>
       <el-button @click="Add()" size="large" type="primary" plain><el-text  size="large">添加</el-text></el-button>
     </div>
@@ -31,19 +31,18 @@ import { ElCheckbox,ElButton,ElText,ElInput,ElProgress } from "element-plus";
     )
 const change=async()=>{
   let xyz=items.value
-  console.log(xyz)
     axios({
     method: 'post',
     url: '/tijiao',
     data: {
       xyz
     }
-    }).then(response=>{console.log(response.data)});
-
+    }).then(response=>{console.log(response.data);    refresh()});
   }
 const refresh=async()=>{
   axios.get('/shuju')
       .then(response => {
+        progress.value=0
         items.value=response.data
         for(var i=0;i<items.value.length;i++)
         {
@@ -79,9 +78,8 @@ const Add=async()=>{
       new_item
     }
     }).then(response=>{
-      
+      refresh()
     });
-  refresh()
 }
 const deletes=async(index:number)=>{
   var chose_id=items.value[index].id
@@ -92,9 +90,9 @@ const deletes=async(index:number)=>{
       chose_id
     }
     }).then(res=>{
-
+      refresh()
     });
-    refresh()
+
 }
 </script>
 <style scoped>
