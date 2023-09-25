@@ -8,10 +8,11 @@
     <div id="Things">
       <div v-for="(item,index) in items" class="Thing">
         <el-checkbox  v-model="item.result" :label=item.thing size="large"  border />
-        <el-button     type="warning" size="large" @click="shanchu(index)" plain><el-text  size="large">删除</el-text></el-button>
+        <el-button     type="warning" size="large" @click="deletes(index)" plain><el-text  size="large">删除</el-text></el-button>
       </div>
     </div>
-    <el-button  type="success" size="large" @click="tijiao" plain><el-text  size="large">提交</el-text></el-button>
+    <el-button  type="success" size="large" @click="refresh" plain><el-text  size="large">更新</el-text></el-button>
+    <el-button  type="success" size="large" @click="change" plain><el-text  size="large">提交</el-text></el-button>
   </div>
 </template>
 <script setup lang="ts">
@@ -24,13 +25,24 @@ import { ElCheckbox,ElButton,ElText,ElInput,ElProgress } from "element-plus";
   let item=ref('');
   let progress=ref(0)
   let xyz=items.value
-  console.log(items.value)
   onMounted(async () => {
-    axios.get('/shuju')
+    refresh()
+  }
+    )
+const change=async()=>{
+    axios({
+    method: 'post',
+    url: '/tijiao',
+    data: {
+      xyz
+    }
+    }).then(response=>{console.log(response.data)});
+  }
+const refresh=async()=>{
+  axios.get('/shuju')
       .then(response => {
-        console.log(response.data);
         items.value=response.data
-        xyz=response.data
+        console.log(items.value[0].id);
         for(var i=0;i<items.value.length;i++)
         {
           if(items.value[i].result==1)
@@ -54,27 +66,34 @@ import { ElCheckbox,ElButton,ElText,ElInput,ElProgress } from "element-plus";
         }
       })
       .catch(error => console.log(error));
-  }
-    )
-  function tijiao(){
+}
+const Add=async()=>{
+  let new_item={thing:item.value,result:0}
+  item.value=""
     axios({
     method: 'post',
-    url: '/tijiao',
+    url: '/add',
     data: {
-      xyz
+      new_item
     }
-    }).then(response=>{console.log(response.data)});
-  }
-  function Add(){
-    let new_item={id:items.value.length+1,thing:item.value,result:false}
-    items.value.push(new_item)
-    item.value=""
-  }
-  function shanchu(a:number){
-    items.value.splice(a,1)
-    console.log(a)
-  }
-  
+    }).then(response=>{
+      
+    });
+  refresh()
+}
+const deletes=async(index:number)=>{
+  var chose_id=items.value[index].id
+  axios({
+    method: 'post',
+    url: '/delete',
+    data: {
+      chose_id
+    }
+    }).then(res=>{
+
+    });
+    refresh()
+}
 </script>
 <style scoped>
   #Border{
