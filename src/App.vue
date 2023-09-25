@@ -24,12 +24,14 @@ import { ElCheckbox,ElButton,ElText,ElInput,ElProgress } from "element-plus";
   items.value=[{id:0,thing:"吃饭",result:"true"},{id:1,thing:"睡觉",result:"true"},{id:2,thing:"学习",result:"false"},{id:3,thing:"工作",result:"false"}];
   let item=ref('');
   let progress=ref(0)
-  let xyz=items.value
+
   onMounted(async () => {
     refresh()
   }
     )
 const change=async()=>{
+  let xyz=items.value
+  console.log(xyz)
     axios({
     method: 'post',
     url: '/tijiao',
@@ -37,12 +39,12 @@ const change=async()=>{
       xyz
     }
     }).then(response=>{console.log(response.data)});
+
   }
 const refresh=async()=>{
   axios.get('/shuju')
       .then(response => {
         items.value=response.data
-        console.log(items.value[0].id);
         for(var i=0;i<items.value.length;i++)
         {
           if(items.value[i].result==1)

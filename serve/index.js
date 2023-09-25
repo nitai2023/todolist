@@ -43,8 +43,8 @@ app.post('/tijiao',function(req,res){
         // }
         // else
         // {
-          db.run(`UPDATE todolist SET thing=${"'"+dataArray[i].thing+"'"}  WHERE id = ${i+1}`)//更新行
-          db.run(`UPDATE todolist SET result=${dataArray[i].result}  WHERE id = ${i+1}`)
+          db.run(`UPDATE todolist SET thing=${"'"+dataArray[i].thing+"'"}  WHERE id = ${dataArray[i].id}`)//更新行
+          db.run(`UPDATE todolist SET result=${dataArray[i].result}  WHERE id = ${dataArray[i].id}`)
           console.log('444+'+i)
         // }
       }
