@@ -1,40 +1,10 @@
-# Todolist
+# 项目介绍
 
-    简单的todolist，实现了前后端的交互
+    简单的todolist，实现了前后端的交互，利用node.js实现了一个简单的服务器，用sqlite实现了简单的数据库，数据库位于本地（所以clone下来的看不到数据）。
 
-## Recommended IDE Setup
+## 开发经历
+    先学习了sqlite数据库语言，利用shell实现了对数据库的调用。后来发现了sqlite.stduio可视化工具（不用写代码了.jpg）。后来学习了node.js,搭建了一个简单的服务器。尝试前后端进行交互，尝试失败，原因：不知道怎么发起请求，不会跨端，不会使用中间件来对数据进行解析。意识到自己欠缺的还有很多。后来学习了axius，学习了跨端，学会使用中间件。最后完成了整个项目（放烟花.jpg）。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 项目收获
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+    对于前后端交互有了初步的认识，学习了相关知识。学会了一点点点点后端，这有利于以后与后端进行对接（会站在后端的方向上思考问题）。
