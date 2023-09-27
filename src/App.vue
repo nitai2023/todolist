@@ -11,8 +11,11 @@
         <el-button     type="warning" size="large" @click="deletes(index)" plain><el-text  size="large">删除</el-text></el-button>
       </div>
     </div>
-    <el-button  type="success" size="large" @click="refresh" plain><el-text  size="large">更新</el-text></el-button>
-    <el-button  type="success" size="large" @click="change" plain><el-text  size="large">提交</el-text></el-button>
+    <div>
+      <el-button  type="success" size="large" @click="refresh" plain><el-text  size="large">更新</el-text></el-button>
+      <el-button  type="success" size="large" @click="change" plain><el-text  size="large">提交</el-text></el-button>
+    </div>
+
   </div>
 </template>
 <script setup lang="ts">
@@ -96,33 +99,28 @@ const deletes=async(index:number)=>{
 }
 </script>
 <style scoped>
+  /* body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
   #Border{
-    position: absolute;
-    width: 30%;
-    height: auto;
-    left: 35%;
-    top: 25%;
-
+    flex: 1;
+    width:40vw;
   }
   #Name{
     position: relative;
     margin: auto;
     width: 100%;
-    height: 30%;
-
+    /* height: 30%; */
+    height: auto;
     text-align: center;
     padding: auto;
 
   }
   h1{
-    position: relative;
-    width: 100%;
-    height: 50%;
-    /*top: 25%;
-    left: 25%;*/
-    text-align: center;
-    font-size: 50px;
-
+    /* /* text-align: center; */
+    font-size: 50px; 
   }
   #Things{
     display: flex;
@@ -142,11 +140,11 @@ const deletes=async(index:number)=>{
     align-self: center;
 
   }
-  #Things input{
+  /* #Things input{
     position: relative;
     margin-top: 10%;
     width: 30px;
     height: 30px;
-  }
+  } */
 
 </style>
