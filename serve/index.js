@@ -42,10 +42,12 @@ app.post('/tijiao',function(req,res){
 app.post('/delete',function(req,res){
   const data = req.body.chose_id;
   db.run(`DELETE FROM todolist WHERE id=${data};`)//删除行
+  res.send("删除成功！");
 })
 app.post('/add',function(req,res){
   const data = req.body.new_item;
   db.run(`INSERT INTO todolist (id,thing,result) VALUES (null,${"'"+data.thing+"'"},${data.result});`)//新增行
+  res.send("添加成功");
 })
 // 终端打印如下信息
 app.listen(port, function() {

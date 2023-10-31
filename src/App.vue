@@ -71,8 +71,8 @@ const change = async () => {
       xyz,
     },
   }).then((response) => {
-
-    
+    console.log(response.data);
+    refresh();
   });
 };
 const refresh = async () => {
