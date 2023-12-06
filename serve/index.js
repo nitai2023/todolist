@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('E:\\sqlite\\test.db');
-const port = 3000;
+const port = 4000;
 // 获取所有用户
 const cors = require('cors')
 app.use(cors())
